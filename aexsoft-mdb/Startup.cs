@@ -53,6 +53,8 @@ namespace aexsoftmdb
 			{
 				endpoints.MapDefaultControllerRoute();
 			});
+
+			SeedData.EnsurePopulated(app);
 		}
 	}
 }

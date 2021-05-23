@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using aexsoftmdb.Models.Entities;
 
 namespace aexsoftmdb.Models.Repositories
 {

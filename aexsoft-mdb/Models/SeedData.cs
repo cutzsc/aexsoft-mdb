@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using aexsoftmdb.Models.Entities;
 
 namespace aexsoftmdb.Models
 {
@@ -46,13 +47,29 @@ namespace aexsoftmdb.Models
 					new Genre() { Name = "War" },
 					new Genre() { Name = "Western" });
 			}
-
 			context.SaveChanges();
 
 			if (!context.Actors.Any())
 			{
-				context.Actors.AddRange();
+				context.Actors.AddRange(
+					new Actor() { FirstName = "Джесси", LastName = "Айзенберг" },
+					new Actor() { FirstName = "Вуди", LastName = "Харрельсон" },
+					new Actor() { FirstName = "Дэйв", LastName = "Франко" },
+					new Actor() { FirstName = "Кристен", LastName = "Стюарт" },
+					new Actor() { FirstName = "Роберт", LastName = "Паттинсон" },
+					new Actor() { FirstName = "Дэниэл", LastName = "Рэдклифф" },
+					new Actor() { FirstName = "Эмма", LastName = "Уотсон" },
+					new Actor() { FirstName = "Сирша", LastName = "Ронан" },
+					new Actor() { FirstName = "Марго", LastName = "Робби" });
 			}
+			context.SaveChanges();
+
+			//if (!context.Movies.Any())
+			//{
+			//	context.Movies.AddRange(
+			//		new Movie() { Title = "" });
+			//}
+			context.SaveChanges();
 		}
 	}
 }
