@@ -4,6 +4,18 @@ using System.ComponentModel.DataAnnotations;
 
 namespace aexsoftmdb.Models.Entities
 {
+	public class MovieGenres
+	{
+		public long MovieGenresId { get; set; }
+		public Genre Genre { get; set; }
+	}
+
+	public class MovieActors
+	{
+		public long MovieActorsId { get; set; }
+		public Actor Actor { get; set; }
+	}
+
 	public class Movie
 	{
 		[BindNever]
@@ -13,9 +25,9 @@ namespace aexsoftmdb.Models.Entities
 		public string Title { get; set; }
 
 		[BindNever]
-		public ICollection<Actor> Actors { get; set; }
+		public ICollection<MovieGenres> Genres { get; set; }
 
 		[BindNever]
-		public ICollection<Genre> Genres { get; set; }
+		public ICollection<MovieActors> Actors { get; set; }
 	}
 }
