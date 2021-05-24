@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using aexsoftmdb.Models;
 
 namespace aexsoftmdb.Migrations
 {
     [DbContext(typeof(AEXSoftMdbDbContext))]
-    partial class AEXSoftMdbDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210524095726_UpdatedMovieModel")]
+    partial class UpdatedMovieModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

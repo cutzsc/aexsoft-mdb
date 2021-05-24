@@ -6,25 +6,35 @@ using System.Threading.Tasks;
 using aexsoftmdb.Models.Entities;
 using aexsoftmdb.Models.Repositories;
 using aexsoftmdb.Models.ViewModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace aexsoftmdb.Controllers
 {
 	public class HomeController : Controller
 	{
 		private IMovieRepository movieRepository;
-		private IActorRepository actorRepository;
 
 		public HomeController(IMovieRepository movieRepository,
 			IActorRepository actorRepository) =>
-			(this.movieRepository, this.actorRepository) =
-			(movieRepository, actorRepository);
+			(this.movieRepository) = (movieRepository);
 
-		public IActionResult Index()
+		public IActionResult Index(string genre)
 		{
-			return View(new MoviesListViewModel()
+			if (genre != null)
 			{
-				Actors = actorRepository.Actors
-			});
+				////var movies = movieRepository.Movies
+				//	.Include(m => m.Genres.Select(g => g.Genre).Where(g => g.Name == genre));
+				//var movies = movieRepository.Movies.Join(movieRepository.Movies.Select(m => m.Genres.Select(g => g.Genre)),
+				//	p => p.MovieId,
+				//	a => a.Select(a => a.GenreId),
+				//	(p, g) =>
+				//	{
+
+				//	});
+				//var arrayMovies = movies.ToArray();
+				//return View(arrayMovies);
+			}
+			return View(movieRepository.Movies);
 		}
 	}
 }

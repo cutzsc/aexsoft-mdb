@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -23,6 +24,13 @@ namespace aexsoftmdb.Models.Entities
 
 		[Required]
 		public string Title { get; set; }
+
+		[DataType(DataType.Date)]
+		[Required]
+		public DateTime ReleaseDate { get; set; }
+
+		[Required]
+		public string Description { get; set; }
 
 		[BindNever]
 		public ICollection<MovieGenres> Genres { get; set; }
