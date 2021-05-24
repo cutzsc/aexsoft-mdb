@@ -16,7 +16,7 @@ namespace aexsoftmdb
 {
 	public class Startup
 	{
-		private IConfiguration Configuration { get; set; }
+		private IConfiguration Configuration { get; }
 
 		public Startup(IConfiguration configuration) =>
 			Configuration = configuration;
