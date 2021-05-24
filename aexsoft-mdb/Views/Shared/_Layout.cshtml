@@ -4,8 +4,34 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
+	<link href="~/lib/twitter-bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
-	@RenderBody()
+
+	<header class="p-3 bg-dark text-white">
+		<div class="container">
+			<div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+				<a asp-action="Index" asp-controller="Home" class="d-flex align-items-center text-white text-decoration-none">
+					<span class="fs-4 mb-1 px-2">MDB</span>
+				</a>
+
+				<ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+					<li><a asp-action="Index" asp-controller="Home" class="nav-link px-2 text-secondary">Home</a></li>
+					<li><a href="#" class="nav-link px-2 text-white">Search</a></li>
+				</ul>
+			</div>
+		</div>
+	</header>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-2">
+				<vc:genres-menu></vc:genres-menu>
+			</div>
+			<div class="col">
+				@RenderBody()
+			</div>
+		</div>
+	</div>
 </body>
 </html>

@@ -12,20 +12,17 @@ namespace aexsoftmdb.Controllers
 	public class HomeController : Controller
 	{
 		private IMovieRepository movieRepository;
-		private IGenreRepository genreRepository;
 		private IActorRepository actorRepository;
 
 		public HomeController(IMovieRepository movieRepository,
-			IGenreRepository genreRepository,
 			IActorRepository actorRepository) =>
-			(this.movieRepository, this.genreRepository, this.actorRepository) =
-			(movieRepository, genreRepository, actorRepository);
+			(this.movieRepository, this.actorRepository) =
+			(movieRepository, actorRepository);
 
 		public IActionResult Index()
 		{
 			return View(new MoviesListViewModel()
 			{
-				Genres = genreRepository.Genres,
 				Actors = actorRepository.Actors
 			});
 		}
