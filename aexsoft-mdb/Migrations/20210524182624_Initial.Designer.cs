@@ -10,8 +10,8 @@ using aexsoftmdb.Models;
 namespace aexsoftmdb.Migrations
 {
     [DbContext(typeof(AEXSoftMdbDbContext))]
-    [Migration("20210524095726_UpdatedMovieModel")]
-    partial class UpdatedMovieModel
+    [Migration("20210524182624_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -80,81 +80,89 @@ namespace aexsoftmdb.Migrations
                     b.ToTable("Movies");
                 });
 
-            modelBuilder.Entity("aexsoftmdb.Models.Entities.MovieActors", b =>
+            modelBuilder.Entity("aexsoftmdb.Models.Entities.MovieActorJunction", b =>
                 {
-                    b.Property<long>("MovieActorsId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<long?>("ActorId")
+                    b.Property<long>("MovieId")
                         .HasColumnType("bigint");
 
-                    b.Property<long?>("MovieId")
+                    b.Property<long>("ActorId")
                         .HasColumnType("bigint");
 
-                    b.HasKey("MovieActorsId");
+                    b.HasKey("MovieId", "ActorId");
 
                     b.HasIndex("ActorId");
 
-                    b.HasIndex("MovieId");
-
-                    b.ToTable("MovieActors");
+                    b.ToTable("MovieActorJunction");
                 });
 
-            modelBuilder.Entity("aexsoftmdb.Models.Entities.MovieGenres", b =>
+            modelBuilder.Entity("aexsoftmdb.Models.Entities.MovieGenreJunction", b =>
                 {
-                    b.Property<long>("MovieGenresId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<long?>("GenreId")
+                    b.Property<long>("MovieId")
                         .HasColumnType("bigint");
 
-                    b.Property<long?>("MovieId")
+                    b.Property<long>("GenreId")
                         .HasColumnType("bigint");
 
-                    b.HasKey("MovieGenresId");
+                    b.HasKey("MovieId", "GenreId");
 
                     b.HasIndex("GenreId");
 
-                    b.HasIndex("MovieId");
-
-                    b.ToTable("MovieGenres");
+                    b.ToTable("MovieGenreJunction");
                 });
 
-            modelBuilder.Entity("aexsoftmdb.Models.Entities.MovieActors", b =>
+            modelBuilder.Entity("aexsoftmdb.Models.Entities.MovieActorJunction", b =>
                 {
                     b.HasOne("aexsoftmdb.Models.Entities.Actor", "Actor")
-                        .WithMany()
-                        .HasForeignKey("ActorId");
+                        .WithMany("MovieActorJunctions")
+                        .HasForeignKey("ActorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("aexsoftmdb.Models.Entities.Movie", null)
-                        .WithMany("Actors")
-                        .HasForeignKey("MovieId");
+                    b.HasOne("aexsoftmdb.Models.Entities.Movie", "Movie")
+                        .WithMany("MovieActorJunctions")
+                        .HasForeignKey("MovieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Actor");
+
+                    b.Navigation("Movie");
                 });
 
-            modelBuilder.Entity("aexsoftmdb.Models.Entities.MovieGenres", b =>
+            modelBuilder.Entity("aexsoftmdb.Models.Entities.MovieGenreJunction", b =>
                 {
                     b.HasOne("aexsoftmdb.Models.Entities.Genre", "Genre")
-                        .WithMany()
-                        .HasForeignKey("GenreId");
+                        .WithMany("MovieGenreJunctions")
+                        .HasForeignKey("GenreId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("aexsoftmdb.Models.Entities.Movie", null)
-                        .WithMany("Genres")
-                        .HasForeignKey("MovieId");
+                    b.HasOne("aexsoftmdb.Models.Entities.Movie", "Movie")
+                        .WithMany("MovieGenreJunctions")
+                        .HasForeignKey("MovieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Genre");
+
+                    b.Navigation("Movie");
+                });
+
+            modelBuilder.Entity("aexsoftmdb.Models.Entities.Actor", b =>
+                {
+                    b.Navigation("MovieActorJunctions");
+                });
+
+            modelBuilder.Entity("aexsoftmdb.Models.Entities.Genre", b =>
+                {
+                    b.Navigation("MovieGenreJunctions");
                 });
 
             modelBuilder.Entity("aexsoftmdb.Models.Entities.Movie", b =>
                 {
-                    b.Navigation("Actors");
+                    b.Navigation("MovieActorJunctions");
 
-                    b.Navigation("Genres");
+                    b.Navigation("MovieGenreJunctions");
                 });
 #pragma warning restore 612, 618
         }

@@ -2,24 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace aexsoftmdb.Models.Entities
 {
-	public class MovieGenres
-	{
-		public long MovieGenresId { get; set; }
-		public Genre Genre { get; set; }
-	}
-
-	public class MovieActors
-	{
-		public long MovieActorsId { get; set; }
-		public Actor Actor { get; set; }
-	}
-
 	public class Movie
 	{
-		[BindNever]
+		[BindNever, Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public long MovieId { get; set; }
 
 		[Required]
@@ -33,9 +22,9 @@ namespace aexsoftmdb.Models.Entities
 		public string Description { get; set; }
 
 		[BindNever]
-		public ICollection<MovieGenres> Genres { get; set; }
+		public ICollection<MovieGenreJunction> MovieGenreJunctions { get; set; }
 
 		[BindNever]
-		public ICollection<MovieActors> Actors { get; set; }
+		public ICollection<MovieActorJunction> MovieActorJunctions { get; set; }
 	}
 }
