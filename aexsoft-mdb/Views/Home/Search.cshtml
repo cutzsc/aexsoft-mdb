@@ -1,0 +1,10 @@
+﻿@model SearchDataViewModel
+
+<vc:search-form />
+
+<h2 class="p-2">Movies</h2>
+
+@foreach (var movie in Model.Movies)
+{
+	<partial name="MovieSummary" model="movie" />
+}

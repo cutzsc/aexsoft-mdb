@@ -5,6 +5,7 @@
 	@foreach (var menu in Model)
 	{
 		<li><a asp-action="@menu.Action" asp-controller="@menu.Controller"
-			   class="nav-link px-2 text-white">@menu.Name</a></li>
+			   class="nav-link px-2
+			   @(ViewBag.SelectedMenu == menu.Action ? "text-secondary" : "text-white")">@menu.Name</a></li>
 	}
 </ul>

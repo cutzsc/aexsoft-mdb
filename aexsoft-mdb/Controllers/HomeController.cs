@@ -14,30 +14,60 @@ namespace aexsoftmdb.Controllers
 	{
 		private IMovieRepository movieRepository;
 		private IGenreRepository genreRepository;
+		private IActorRepository actorRepository;
 
 		public HomeController(IMovieRepository movieRepository, IGenreRepository genreRepository,
 			IActorRepository actorRepository) =>
-			(this.movieRepository, this.genreRepository) = (movieRepository, genreRepository);
+			(this.movieRepository, this.genreRepository, this.actorRepository) = (movieRepository, genreRepository, actorRepository);
 
 		public IActionResult Index(string genre)
 		{
-			//if (genre != null)
-			//{
-			//	var movies = movieRepository.Movies.Select(m => m.Genres.Select(g => g.Genre).Where(g => g.Name == genre)).ToArray();
-			//	////var movies = movieRepository.Movies
-			//	//	.Include(m => m.Genres.Select(g => g.Genre).Where(g => g.Name == genre));
-			//	//var movies = movieRepository.Movies.Join(movieRepository.Movies.Select(m => m.Genres.Select(g => g.Genre)),
-			//	//	p => p.MovieId,
-			//	//	a => a.Select(a => a.GenreId),
-			//	//	(p, g) =>
-			//	//	{
+			Movie[] movies = movieRepository.Movies.Select(m => m).ToArray();
+			MovieViewModel[] result = new MovieViewModel[movies.Length];
 
-			//	//	});
-			//	//var arrayMovies = movies.ToArray();
-			//	//return View(arrayMovies);
-			//	return View(movies);
-			//}
-			return View(movieRepository.Movies);
+			for (int i = 0; i < result.Length; i++)
+			{
+				result[i] = new MovieViewModel();
+				result[i].Movie = movies[i];
+				result[i].Genres = genreRepository.Genres
+					.Where(g => g.MovieGenreJunctions.Any(mg => mg.MovieId == result[i].Movie.MovieId)).ToArray();
+				result[i].Actors = actorRepository.Actors
+					.Where(g => g.MovieActorJunctions.Any(ma => ma.MovieId == result[i].Movie.MovieId)).ToArray();
+			}
+
+			return View(result);
+		}
+
+		public IActionResult Search()
+		{
+			SearchDataViewModel data = new SearchDataViewModel();
+
+			Movie[] movies = movieRepository.Movies.Select(m => m).ToArray();
+			MovieViewModel[] result = new MovieViewModel[movies.Length];
+
+			for (int i = 0; i < result.Length; i++)
+			{
+				result[i] = new MovieViewModel();
+				result[i].Movie = movies[i];
+				result[i].Genres = genreRepository.Genres
+					.Where(g => g.MovieGenreJunctions.Any(mg => mg.MovieId == result[i].Movie.MovieId)).ToArray();
+				result[i].Actors = actorRepository.Actors
+					.Where(g => g.MovieActorJunctions.Any(ma => ma.MovieId == result[i].Movie.MovieId)).ToArray();
+			}
+
+			data.Movies = result;
+
+			return View(data);
+		}
+
+		[HttpPost]
+		public IActionResult Search(SearchDataViewModel data)
+		{
+			// GOOD ONE
+			//return View(movieRepository.Movies
+			//	.Where(m => m.MovieGenreJunctions.Any(mg => genre == null || mg.Genre.Name == genre
+
+			return View();
 		}
 	}
 }

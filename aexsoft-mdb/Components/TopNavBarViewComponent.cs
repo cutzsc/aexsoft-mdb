@@ -7,7 +7,7 @@ namespace aexsoftmdb.Components
 	{
 		public IViewComponentResult Invoke()
 		{
-			ViewBag.SelectedMenu = RouteData?.Values;
+			ViewBag.SelectedMenu = RouteData?.Values["action"];
 			return View(NavigationMenuViewModel.GetNavigationMenuModels());
 		}
 	}
