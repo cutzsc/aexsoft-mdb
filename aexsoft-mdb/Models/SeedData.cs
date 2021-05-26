@@ -26,26 +26,16 @@ namespace aexsoftmdb.Models
 				context.Genres.AddRange(
 					new Genre() { Name = "Action" },
 					new Genre() { Name = "Adventure" },
-					new Genre() { Name = "Animation" },
 					new Genre() { Name = "Biography" },
 					new Genre() { Name = "Comedy" },
 					new Genre() { Name = "Crime" },
-					new Genre() { Name = "Documentary" },
 					new Genre() { Name = "Drama" },
 					new Genre() { Name = "Family" },
 					new Genre() { Name = "Fantasy" },
 					new Genre() { Name = "History" },
-					new Genre() { Name = "Horror" },
-					new Genre() { Name = "Music" },
-					new Genre() { Name = "Musical" },
 					new Genre() { Name = "Mystery" },
 					new Genre() { Name = "Romance" },
-					new Genre() { Name = "Sci-Fi" },
-					new Genre() { Name = "Sport" },
-					new Genre() { Name = "Superhero" },
-					new Genre() { Name = "Thriller" },
-					new Genre() { Name = "War" },
-					new Genre() { Name = "Western" });
+					new Genre() { Name = "Thriller" });
 			}
 			context.SaveChanges();
 

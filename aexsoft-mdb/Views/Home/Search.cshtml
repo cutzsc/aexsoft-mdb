@@ -1,6 +1,32 @@
 ﻿@model SearchDataViewModel
 
-<vc:search-form />
+<h2 class="p-2">Search</h2>
+
+<form asp-action="Search" method="get">
+	<div class="form-group mb-2">
+		<label for="genres" class="mb-1">Select Genre:</label>
+		<select multiple="multiple" class="form-control" id="genres" name="genres">
+			<option value="">Any</option>
+			@foreach (Genre g in Model.Genres)
+			{
+				<option value="@g.GenreId">@g.Name</option>
+			}
+		</select>
+	</div>
+	<div class="form-group mb-2">
+		<label for="actors" class="mb-1">Select Actor:</label>
+		<select multiple="multiple" class="form-control" id="actors" name="actors">
+			<option value="">Any</option>
+			@foreach (Actor a in Model.Actors)
+			{
+				<option value="@a.ActorId">@($"{a.FirstName} {a.LastName}")</option>
+			}
+		</select>
+	</div>
+	<div class="text-center">
+		<input type="submit" class="btn btn-primary my-2" value="Show Movies">
+	</div>
+</form>
 
 <h2 class="p-2">Movies</h2>
 
