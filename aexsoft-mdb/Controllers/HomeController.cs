@@ -16,7 +16,7 @@ namespace aexsoftmdb.Controllers
 			IActorRepository actorRepository) =>
 			(this.movieRepository, this.genreRepository, this.actorRepository) = (movieRepository, genreRepository, actorRepository);
 
-		public IActionResult Index(string genre)
+		public IActionResult Index()
 		{
 			Movie[] movies = movieRepository.Movies.Select(m => m).ToArray();
 			return View(CreateMovieViewModelResult(movies));
@@ -68,9 +68,9 @@ namespace aexsoftmdb.Controllers
 				result[i] = new MovieViewModel();
 				result[i].Movie = movies[i];
 				result[i].Genres = genreRepository.Genres
-					.Where(g => g.MovieGenreJunctions.Any(mg => mg.MovieId == result[i].Movie.MovieId)).ToArray();
+					.Where(g => g.MovieGenreJunctions.Any(j => j.MovieId == result[i].Movie.MovieId)).ToArray();
 				result[i].Actors = actorRepository.Actors
-					.Where(g => g.MovieActorJunctions.Any(ma => ma.MovieId == result[i].Movie.MovieId)).ToArray();
+					.Where(g => g.MovieActorJunctions.Any(j => j.MovieId == result[i].Movie.MovieId)).ToArray();
 			}
 
 			return result;
