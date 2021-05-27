@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace aexsoftmdb.Models.ViewModels
 {
 	/// <summary>
-	/// Dummy data for navigation menu.
+	/// Hard coded data for navigation menu.
 	/// </summary>
 	public class NavigationMenuViewModel
 	{

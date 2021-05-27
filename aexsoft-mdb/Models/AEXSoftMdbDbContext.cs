@@ -7,6 +7,9 @@ using aexsoftmdb.Models.Entities;
 
 namespace aexsoftmdb.Models
 {
+	/// <summary>
+	/// Regular db context of entity framework 
+	/// </summary>
 	public class AEXSoftMdbDbContext : DbContext
 	{
 		public AEXSoftMdbDbContext(DbContextOptions<AEXSoftMdbDbContext> options)

@@ -6,6 +6,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace aexsoftmdb.Models.Entities
 {
+	/// <summary>
+	/// Table of movies
+	/// </summary>
 	public class Movie
 	{
 		[BindNever, Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]

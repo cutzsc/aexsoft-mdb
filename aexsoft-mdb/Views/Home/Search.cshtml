@@ -5,8 +5,8 @@
 <form asp-action="Search" method="get">
 	<div class="form-group mb-2">
 		<label for="genres" class="mb-1">Select Genre:</label>
-		<select multiple="multiple" class="form-control" id="genres" name="genres">
-			<option value="">Any</option>
+		<select multiple="multiple" class="form-control" id="genres" name="genres" style="height: 250px;">
+			<option value="">Любой жанр</option>
 			@foreach (Genre g in Model.Genres)
 			{
 				<option value="@g.GenreId">@g.Name</option>
@@ -15,8 +15,8 @@
 	</div>
 	<div class="form-group mb-2">
 		<label for="actors" class="mb-1">Select Actor:</label>
-		<select multiple="multiple" class="form-control" id="actors" name="actors">
-			<option value="">Any</option>
+		<select multiple="multiple" class="form-control" id="actors" name="actors" style="height: 200px;">
+			<option value="">Любой актер</option>
 			@foreach (Actor a in Model.Actors)
 			{
 				<option value="@a.ActorId">@($"{a.FirstName} {a.LastName}")</option>

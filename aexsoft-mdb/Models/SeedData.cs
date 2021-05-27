@@ -9,6 +9,9 @@ using aexsoftmdb.Models.Entities;
 
 namespace aexsoftmdb.Models
 {
+	/// <summary>
+	/// Initial data for testing
+	/// </summary>
 	public static class SeedData
 	{
 		public static void EnsurePopulated(IApplicationBuilder app)

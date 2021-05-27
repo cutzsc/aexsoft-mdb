@@ -1,12 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using aexsoftmdb.Models.Entities;
 using aexsoftmdb.Models.Repositories;
 using aexsoftmdb.Models.ViewModels;
-using Microsoft.EntityFrameworkCore;
 
 namespace aexsoftmdb.Controllers
 {
@@ -29,15 +25,28 @@ namespace aexsoftmdb.Controllers
 		public IActionResult Search(long[] genres, long[] actors)
 		{
 			SearchDataViewModel data = new SearchDataViewModel();
+			
+			// ANY
+			//Movie[] movies = movieRepository.Movies
+			//	.Where(m => m.MovieGenreJunctions.Any(j => genres.Length > 0 ? genres.Contains(j.GenreId) : true))
+			//	.Where(m => m.MovieActorJunctions.Any(j => actors.Length > 0 ? actors.Contains(j.ActorId) : true))
+			//	.ToArray();
 
-			Movie[] movies = movieRepository.Movies
-				.Where(m => m.MovieGenreJunctions
-					.Any(j => genres.Length > 0 ? genres[0] == 0 || genres[0] == j.GenreId : true))
-				.Where(m => m.MovieActorJunctions
-					.Any(j => actors.Length > 0 ? actors[0] == 0 || actors[0] == j.ActorId : true))
-				.ToArray();
+			// ALL
+			var movies = movieRepository.Movies;
+			foreach (long genreId in genres)
+			{
+				movies = movies
+					.Where(m => m.MovieGenreJunctions.Any(j => j.GenreId == genreId));
+			}
+			
+			foreach (long actorId in actors)
+			{
+				movies = movies
+					.Where(m => m.MovieActorJunctions.Any(j => j.ActorId == actorId));
+			}
 
-			MovieViewModel[] result = CreateMovieViewModelResult(movies);
+			MovieViewModel[] result = CreateMovieViewModelResult(movies.ToArray());
 
 			data.Movies = result;
 			data.Genres = genreRepository.Genres;
@@ -46,6 +55,11 @@ namespace aexsoftmdb.Controllers
 			return View(data);
 		}
 
+		/// <summary>
+		/// Creates MovieViewModel array from given movie array.
+		/// </summary>
+		/// <param name="movies"></param>
+		/// <returns>MovieViewModel array which contains a movie with genres and actors that belong to this movie.</returns>
 		private MovieViewModel[] CreateMovieViewModelResult(Movie[] movies)
 		{
 			MovieViewModel[] result = new MovieViewModel[movies.Length];

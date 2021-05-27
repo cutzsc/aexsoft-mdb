@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace aexsoftmdb.Models.ViewModels
 {
+	/// <summary>
+	/// Represents each movie with it's own genres and actors
+	/// </summary>
 	public class MovieViewModel
 	{
 		public Movie Movie { get; set; }

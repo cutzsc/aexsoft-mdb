@@ -3,6 +3,9 @@ using aexsoftmdb.Models.ViewModels;
 
 namespace aexsoftmdb.Components
 {
+	/// <summary>
+	/// Component which represents navigation for header.
+	/// </summary>
 	public class TopNavBarViewComponent : ViewComponent
 	{
 		public IViewComponentResult Invoke()

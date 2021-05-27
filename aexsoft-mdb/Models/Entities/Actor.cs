@@ -5,6 +5,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace aexsoftmdb.Models.Entities
 {
+	/// <summary>
+	/// Table that provides "many to many" relationships with movies and actors
+	/// </summary>
 	public class MovieActorJunction
 	{
 		public long MovieId { get; set; }
@@ -14,6 +17,9 @@ namespace aexsoftmdb.Models.Entities
 		public Actor Actor { get; set; }
 	}
 
+	/// <summary>
+	/// Table of actors
+	/// </summary>
 	public class Actor
 	{
 		[BindNever, Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]

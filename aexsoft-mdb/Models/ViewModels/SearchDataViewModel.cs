@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace aexsoftmdb.Models.ViewModels
 {
+	/// <summary>
+	/// A model with data for searching and Movies that filtered with specific parameters.
+	/// </summary>
 	public class SearchDataViewModel
 	{
 		// Result
