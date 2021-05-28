@@ -16,4 +16,4 @@ dotnet add aexsoft-mdb/aexsoft-mdb.Tests package Moq
 dotnet add aexsoft-mdb/aexsoft-mdb package Microsoft.EntityFrameworkCore.Design  
 dotnet add aexsoft-mdb/aexsoft-mdb package Microsoft.EntityFrameworkCore.SqlServer  
 
-## Entities
+## Entities [(https://github.com/cutzsc/aexsoft-mdb/blob/main/images/Entities.png)]
