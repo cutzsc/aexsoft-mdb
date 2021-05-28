@@ -19,3 +19,7 @@ dotnet add aexsoft-mdb/aexsoft-mdb package Microsoft.EntityFrameworkCore.SqlServ
 ## Entities
 
 ![model](https://github.com/cutzsc/aexsoft-mdb/blob/main/images/Entities.png?raw=true)
+
+## Release
+
+http://aexsoft-mdb.azurewebsites.net/
