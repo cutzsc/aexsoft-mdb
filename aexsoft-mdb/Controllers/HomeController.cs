@@ -20,6 +20,9 @@ namespace aexsoftmdb.Controllers
 
 		public IActionResult Index(int page = 0)
 		{
+			// validate
+			page = page < 0 ? 0 : page;
+
 			Movie[] movies = movieRepository.Movies
 				.Skip(PageSize * page)
 				.Take(PageSize)
@@ -57,6 +60,9 @@ namespace aexsoftmdb.Controllers
 				movies = movies
 					.Where(m => m.MovieActorJunctions.Any(j => j.ActorId == actorId));
 			}
+
+			// validate
+			page = page < 0 ? 0 : page;
 
 			// Create Pagination options
 			ViewBag.Pagination = new PaginationOptions

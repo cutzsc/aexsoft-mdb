@@ -21,11 +21,10 @@ namespace aexsoftmdb.TagHelpers
 		[HtmlAttributeNotBound]
 		public ViewContext ViewContext { get; set; }
 
+		// Attributes
 		public PaginationOptions PaginationOptions { get; set; }
-
 		[HtmlAttributeName(DictionaryAttributePrefix = "page-url-")]
 		public Dictionary<string, object> PageUrlValues { get; set; } = new Dictionary<string, object>();
-
 		public string PaginationAction { get; set; }
 		public string PaginationController { get; set; }
 		public string PaginationItem { get; set; }
@@ -59,6 +58,13 @@ namespace aexsoftmdb.TagHelpers
 			output.Content.AppendHtml(result.InnerHtml);
 		}
 
+		/// <summary>
+		/// Creates html element as pagination item.
+		/// </summary>
+		/// <param name="urlHelper">Url Helper</param>
+		/// <param name="page">Page number</param>
+		/// <param name="text">Html tag inner text</param>
+		/// <returns>HTML tag as TagBuilder</returns>
 		private TagBuilder CreatePaginationItem(IUrlHelper urlHelper, int page, string text)
 		{
 			TagBuilder item = new TagBuilder("li");
