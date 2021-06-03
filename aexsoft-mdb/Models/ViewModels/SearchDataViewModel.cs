@@ -17,5 +17,9 @@ namespace aexsoftmdb.Models.ViewModels
 		// Search parameters
 		public IEnumerable<Genre> Genres { get; set; }
 		public IEnumerable<Actor> Actors { get; set; }
+
+		// Search selected options
+		public long[] GenreIds { get; set; }
+		public long[] ActorIds { get; set; }
 	}
 }

@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace aexsoftmdb.Models.ViewModels
 {
+	/// <summary>
+	/// Information for Pagination Tag Helper
+	/// </summary>
 	public class PaginationOptions
 	{
 		public int PageSize { get; set; }

@@ -34,3 +34,13 @@
 {
 	<partial name="MovieSummary" model="movie" />
 }
+
+<nav>
+	<ul pagination-action="Search" pagination-controller="Home"
+		pagination-options="@(ViewBag.Pagination as PaginationOptions)"
+		pagination-item="page-item" pagination-link="page-link" pagination-item-active="active"
+		pagination-item-disabled="disabled"
+		page-url-genres="@Model.GenreIds"
+		page-url-actors="@Model.ActorIds"
+		class="pagination justify-content-center mt-4"></ul>
+</nav>

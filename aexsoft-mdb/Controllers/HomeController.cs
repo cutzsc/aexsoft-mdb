@@ -12,45 +12,75 @@ namespace aexsoftmdb.Controllers
 		private IGenreRepository genreRepository;
 		private IActorRepository actorRepository;
 
+		public int PageSize { get; } = 3;
+
 		public HomeController(IMovieRepository movieRepository, IGenreRepository genreRepository,
 			IActorRepository actorRepository) =>
 			(this.movieRepository, this.genreRepository, this.actorRepository) = (movieRepository, genreRepository, actorRepository);
 
-		public IActionResult Index()
+		public IActionResult Index(int page = 0)
 		{
-			Movie[] movies = movieRepository.Movies.Select(m => m).ToArray();
+			Movie[] movies = movieRepository.Movies
+				.Skip(PageSize * page)
+				.Take(PageSize)
+				.ToArray();
+
+			ViewBag.Pagination = new PaginationOptions
+			{
+				PageSize = PageSize,
+				CurrentPage = page,
+				TotalElements = movieRepository.Movies.Count()
+			};
+
 			return View(CreateMovieViewModelResult(movies));
 		}
 
-		public IActionResult Search(long[] genres, long[] actors)
+		public IActionResult Search(long[] genres, long[] actors, int page = 0)
 		{
 			SearchDataViewModel data = new SearchDataViewModel();
-			
-			// ANY
+
+			// Select movies that matches to any parameters
 			//Movie[] movies = movieRepository.Movies
 			//	.Where(m => m.MovieGenreJunctions.Any(j => genres.Length > 0 ? genres.Contains(j.GenreId) : true))
 			//	.Where(m => m.MovieActorJunctions.Any(j => actors.Length > 0 ? actors.Contains(j.ActorId) : true))
 			//	.ToArray();
 
-			// ALL
+			// Select movies that matches to all parameters
 			var movies = movieRepository.Movies;
 			foreach (long genreId in genres)
 			{
 				movies = movies
 					.Where(m => m.MovieGenreJunctions.Any(j => j.GenreId == genreId));
 			}
-			
 			foreach (long actorId in actors)
 			{
 				movies = movies
 					.Where(m => m.MovieActorJunctions.Any(j => j.ActorId == actorId));
 			}
 
+			// Create Pagination options
+			ViewBag.Pagination = new PaginationOptions
+			{
+				PageSize = PageSize,
+				CurrentPage = page,
+				TotalElements = movies.Count()
+			};
+
+			// Pagination
+			movies = movies
+				.Skip(PageSize * page)
+				.Take(PageSize);
+
+			// Get genres and actors for each movie
 			MovieViewModel[] result = CreateMovieViewModelResult(movies.ToArray());
 
 			data.Movies = result;
+			// Parameters for search field
 			data.Genres = genreRepository.Genres;
 			data.Actors = actorRepository.Actors;
+			// Remember selected options for pagination
+			data.GenreIds = genres;
+			data.ActorIds = actors;
 
 			return View(data);
 		}
